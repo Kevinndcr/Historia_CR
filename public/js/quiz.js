@@ -110,43 +110,31 @@ function showNameForm() {
                 <h4 class="mb-4">¡Bienvenido al Quiz!</h4>
                 <p class="mb-4">Ingresa tu nombre para comenzar:</p>
                 <form id="nameForm" class="mb-4">
-                    <div class="form-group mb-3">
-                        <input type="text" class="form-control form-control-lg" id="playerName" required
-                               placeholder="Tu nombre" maxlength="20">
+                    <div class="form-group">
+                        <input type="text" 
+                               class="form-control mb-3" 
+                               id="playerNameInput" 
+                               placeholder="Tu nombre"
+                               required>
                     </div>
-                    <button type="submit" class="btn btn-primary btn-lg">Comenzar Quiz</button>
+                    <button type="submit" class="btn btn-primary">
+                        Comenzar Quiz
+                    </button>
                 </form>
-                <div id="leaderboard" class="mt-4">
-                    <h5 class="mb-3">🏆 Top 5 Jugadores 🏆</h5>
-                    <div class="table-responsive">
-                        <table class="table table-hover">
-                            <thead>
-                                <tr>
-                                    <th>Posición</th>
-                                    <th>Nombre</th>
-                                    <th>Puntuación</th>
-                                    <th>Tiempo</th>
-                                </tr>
-                            </thead>
-                            <tbody id="leaderboardBody">
-                                <tr>
-                                    <td colspan="4">Cargando...</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
             </div>
         </div>
     `;
-    
+
     quizContainer.innerHTML = html;
-    updateLeaderboard();
-    
+
+    // Manejar el envío del formulario
     document.getElementById('nameForm').addEventListener('submit', (e) => {
         e.preventDefault();
-        playerName = document.getElementById('playerName').value.trim();
+        playerName = document.getElementById('playerNameInput').value.trim();
         if (playerName) {
+            // Reiniciar el estado del quiz
+            currentQuestion = 0;
+            score = 0;
             startTime = Date.now();
             showQuestion();
         }
