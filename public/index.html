@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campaña Nacional 1856-1857</title>
+    <!-- Fuentes -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- AOS para animaciones al scroll -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Leaflet CSS para el mapa -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css">
+    <!-- Timeline CSS -->
+    <link rel="stylesheet" href="css/timeline.css">
+    <!-- Estilos personalizados -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">Campaña Nacional</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#inicio">Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#timeline">Línea de Tiempo</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#mapa">Mapa</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#galeria">Galería</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#quiz">Quiz</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header id="inicio" class="hero-section">
+        <div class="container h-100">
+            <div class="row h-100 align-items-center">
+                <div class="col-12 text-center text-white hero-content">
+                    <h1 class="display-3 mb-4" data-aos="fade-up">Campaña Nacional 1856-1857</h1>
+                    <p class="lead mb-4" data-aos="fade-up" data-aos-delay="200">Un viaje interactivo por la historia de Costa Rica</p>
+                    <a href="#timeline" class="btn btn-outline-light btn-lg hero-btn" data-aos="fade-up" data-aos-delay="400">
+                        Explorar Historia
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Timeline Section -->
+    <section id="timeline" class="py-5 section-transition">
+        <div class="container">
+            <h2 class="text-center mb-5" data-aos="fade-up">Línea de Tiempo</h2>
+            <div class="timeline-container" data-aos="fade-up">
+                <!-- Se llenará dinámicamente con JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Mapa Interactivo -->
+    <section id="mapa" class="py-5 bg-light section-transition">
+        <div class="container">
+            <h2 class="text-center mb-5" data-aos="fade-up">Mapa de la Campaña</h2>
+            <div id="map" class="map-container" data-aos="zoom-in"></div>
+        </div>
+    </section>
+
+    <!-- Galería -->
+    <section id="galeria" class="py-5 section-transition">
+        <div class="container">
+            <h2 class="text-center mb-5" data-aos="fade-up">Galería Histórica</h2>
+            <div class="row" id="galeria-container">
+                <!-- Se llenará dinámicamente con JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Quiz Section -->
+    <section id="quiz" class="py-5 bg-light section-transition">
+        <div class="container">
+            <h2 class="text-center mb-5" data-aos="fade-up">Pon a Prueba tus Conocimientos</h2>
+            <div class="quiz-container" data-aos="fade-up">
+                <!-- Se llenará dinámicamente con JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4">
+        <div class="container">
+            <div class="row justify-content-between align-items-center">
+                <div class="col-md-4 text-center text-md-start mb-3 mb-md-0">
+                    <p class="mb-0"> 2025 Campaña Nacional 1856-1857</p>
+                </div>
+                <div class="col-md-4 text-center mb-3 mb-md-0">
+                    <h6 class="mb-3">Desarrollado por:</h6>
+                    <ul class="list-unstyled mb-0">
+                        <li>Kevin Córdoba Rivera</li>
+                        <li>Eliacid Castillo Rojas</li>
+                        <li>Adrian Lagos Guzman</li>
+                        <li>Santos Antonio Alvarado Castillo</li>
+                    </ul>
+                </div>
+                <div class="col-md-4 text-center text-md-end">
+                    <div class="qr-container" data-bs-toggle="tooltip" data-bs-placement="top" title="¡Escanea para compartir!">
+                        <img src="images/QR Historia.png" alt="Código QR" class="qr-code" style="max-height: 100px;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
+    
+    <!-- Scripts de la aplicación -->
+    <script src="js/firebase-config.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/map.js"></script>
+    <script src="js/timeline.js"></script>
+    <script src="js/gallery.js"></script>
+    <script src="js/quiz.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('DOM completamente cargado');
+            AOS.init({
+                duration: 1000,
+                once: true,
+                offset: 100
+            });
+            
+            // Verificar que los contenedores existen
+            const timelineContainer = document.querySelector('.timeline-container');
+            const galleryContainer = document.getElementById('galeria-container');
+            
+            console.log('Timeline container:', timelineContainer);
+            console.log('Gallery container:', galleryContainer);
+            
+            // Verificar que los scripts se cargaron
+            console.log('Scripts cargados:', {
+                timeline: typeof initTimeline !== 'undefined',
+                gallery: typeof createGalleryItems !== 'undefined',
+                map: typeof initMap !== 'undefined',
+                quiz: typeof initQuiz !== 'undefined'
+            });
+
+            // Smooth scroll para los enlaces del navbar
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
