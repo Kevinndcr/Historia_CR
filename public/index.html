@@ -6,6 +6,8 @@
     <title>Campaña Nacional 1856-1857</title>
     <!-- Fuentes -->
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- AOS para animaciones al scroll -->
@@ -16,8 +18,28 @@
     <link rel="stylesheet" href="css/timeline.css">
     <!-- Estilos personalizados -->
     <link rel="stylesheet" href="css/styles.css">
+    <!-- Animaciones adicionales -->
+    <link rel="stylesheet" href="css/animations.css">
+    
+    <!-- Script para aplicar tema oscuro inmediatamente (evitar flash) -->
+    <script>
+        // Aplicar tema oscuro por defecto ANTES de que se renderice la página
+        (function() {
+            const savedTheme = localStorage.getItem('theme');
+            // Solo usar modo claro si el usuario lo ha seleccionado específicamente
+            if (savedTheme !== 'light') {
+                // Si no hay tema guardado, establecer oscuro como predeterminado
+                if (!savedTheme) {
+                    localStorage.setItem('theme', 'dark');
+                }
+            }
+        })();
+    </script>
 </head>
-<body>
+<body class="dark-theme">
+    <!-- Indicador de progreso de lectura -->
+    <div class="reading-progress" id="reading-progress"></div>
+    
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
         <div class="container">
@@ -32,6 +54,11 @@
                     <li class="nav-item"><a class="nav-link" href="#mapa">Mapa</a></li>
                     <li class="nav-item"><a class="nav-link" href="#galeria">Galería</a></li>
                     <li class="nav-item"><a class="nav-link" href="#quiz">Quiz</a></li>
+                    <li class="nav-item">
+                        <button class="btn btn-outline-warning btn-sm theme-toggle" id="themeToggle" aria-label="Cambiar tema">
+                            <i class="fas fa-sun" id="themeIcon"></i>
+                        </button>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -42,11 +69,21 @@
         <div class="container h-100">
             <div class="row h-100 align-items-center">
                 <div class="col-12 text-center text-white hero-content">
-                    <h1 class="display-3 mb-4" data-aos="fade-up">Campaña Nacional 1856-1857</h1>
-                    <p class="lead mb-4" data-aos="fade-up" data-aos-delay="200">Un viaje interactivo por la historia de Costa Rica</p>
-                    <a href="#timeline" class="btn btn-outline-light btn-lg hero-btn" data-aos="fade-up" data-aos-delay="400">
-                        Explorar Historia
-                    </a>
+                    <h1 class="display-3 mb-4" data-aos="fade-up" data-aos-duration="1000">Campaña Nacional 1856-1857</h1>
+                    <p class="lead mb-4" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000">Un viaje interactivo por la historia de Costa Rica</p>
+                    <div data-aos="fade-up" data-aos-delay="400" data-aos-duration="1000">
+                        <a href="#timeline" class="btn btn-outline-light btn-lg hero-btn me-3 mb-2">
+                            <i class="fas fa-compass me-2"></i>Explorar Historia
+                        </a>
+                        <a href="#quiz" class="btn btn-outline-light btn-lg hero-btn mb-2">
+                            <i class="fas fa-brain me-2"></i>Poner a Prueba
+                        </a>
+                    </div>
+                    <div class="mt-5" data-aos="fade-up" data-aos-delay="600">
+                        <div class="scroll-indicator">
+                            <div class="scroll-arrow"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -56,7 +93,14 @@
     <section id="timeline" class="py-5 section-transition">
         <div class="container">
             <h2 class="text-center mb-5" data-aos="fade-up">Línea de Tiempo</h2>
-            <div class="timeline-container" data-aos="fade-up">
+            <div class="row mb-4">
+                <div class="col-12 text-center">
+                    <p class="lead text-muted" data-aos="fade-up" data-aos-delay="200">
+                        Descubre los momentos más importantes de la Campaña Nacional de 1856-1857
+                    </p>
+                </div>
+            </div>
+            <div class="timeline-container" data-aos="fade-up" data-aos-delay="400">
                 <!-- Se llenará dinámicamente con JavaScript -->
             </div>
         </div>
@@ -66,7 +110,18 @@
     <section id="mapa" class="py-5 bg-light section-transition">
         <div class="container">
             <h2 class="text-center mb-5" data-aos="fade-up">Mapa de la Campaña</h2>
-            <div id="map" class="map-container" data-aos="zoom-in"></div>
+            <div class="row mb-4">
+                <div class="col-12 text-center">
+                    <p class="lead text-muted" data-aos="fade-up" data-aos-delay="200">
+                        Explora los lugares históricos donde se desarrollaron los eventos más importantes
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div id="map" class="map-container" data-aos="zoom-in" data-aos-delay="300"></div>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -74,6 +129,13 @@
     <section id="galeria" class="py-5 section-transition">
         <div class="container">
             <h2 class="text-center mb-5" data-aos="fade-up">Galería Histórica</h2>
+            <div class="row mb-4">
+                <div class="col-12 text-center">
+                    <p class="lead text-muted" data-aos="fade-up" data-aos-delay="200">
+                        Imágenes y representaciones de los personajes, lugares y batallas más emblemáticas
+                    </p>
+                </div>
+            </div>
             <div class="row" id="galeria-container">
                 <!-- Se llenará dinámicamente con JavaScript -->
             </div>
@@ -83,32 +145,391 @@
     <!-- Quiz Section -->
     <section id="quiz" class="py-5 bg-light section-transition">
         <div class="container">
-            <h2 class="text-center mb-5" data-aos="fade-up">Pon a Prueba tus Conocimientos</h2>
-            <div class="quiz-container" data-aos="fade-up">
-                <!-- Se llenará dinámicamente con JavaScript -->
+            <h2 class="text-center mb-5" data-aos="fade-up">
+                <i class="fas fa-brain me-2 text-primary"></i>
+                Pon a Prueba tus Conocimientos
+            </h2>
+            <div class="row mb-4">
+                <div class="col-12 text-center">
+                    <p class="lead text-muted" data-aos="fade-up" data-aos-delay="200">
+                        Desafía tu conocimiento sobre la Campaña Nacional con nuestro quiz interactivo
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Top 3 Mejores Puntajes -->
+            <div class="row mb-5" data-aos="fade-up" data-aos-delay="300">
+                <div class="col-12">
+                    <div class="podium-section">
+                        <h3 class="text-center mb-4">
+                            <i class="fas fa-trophy me-2 text-warning"></i>
+                            Top 3 Mejores Puntajes
+                            <button id="refresh-podium" class="btn btn-sm btn-outline-warning ms-3" title="Actualizar podio">
+                                <i class="fas fa-refresh"></i>
+                            </button>
+                        </h3>
+                        <div class="podium-container">
+                            <!-- Segundo Lugar -->
+                            <div class="podium-position second-place" data-aos="flip-left" data-aos-delay="400">
+                                <div class="podium-medal">
+                                    <i class="fas fa-medal"></i>
+                                    <span class="position-number">2</span>
+                                </div>
+                                <div class="podium-info">
+                                    <h5 class="player-name" id="second-place-name">---</h5>
+                                    <p class="player-score" id="second-place-score">--- pts</p>
+                                    <p class="player-time" id="second-place-time">--:--</p>
+                                </div>
+                                <div class="podium-base second"></div>
+                            </div>
+                            
+                            <!-- Primer Lugar -->
+                            <div class="podium-position first-place" data-aos="flip-up" data-aos-delay="300">
+                                <div class="podium-crown">
+                                    <i class="fas fa-crown"></i>
+                                </div>
+                                <div class="podium-medal">
+                                    <i class="fas fa-medal"></i>
+                                    <span class="position-number">1</span>
+                                </div>
+                                <div class="podium-info">
+                                    <h4 class="player-name" id="first-place-name">---</h4>
+                                    <p class="player-score" id="first-place-score">--- pts</p>
+                                    <p class="player-time" id="first-place-time">--:--</p>
+                                </div>
+                                <div class="podium-base first"></div>
+                            </div>
+                            
+                            <!-- Tercer Lugar -->
+                            <div class="podium-position third-place" data-aos="flip-right" data-aos-delay="500">
+                                <div class="podium-medal">
+                                    <i class="fas fa-medal"></i>
+                                    <span class="position-number">3</span>
+                                </div>
+                                <div class="podium-info">
+                                    <h5 class="player-name" id="third-place-name">---</h5>
+                                    <p class="player-score" id="third-place-score">--- pts</p>
+                                    <p class="player-time" id="third-place-time">--:--</p>
+                                </div>
+                                <div class="podium-base third"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Quiz Container -->
+            <div class="quiz-container-modern" data-aos="fade-up" data-aos-delay="600">
+                <div class="quiz-welcome-card">
+                    <div class="welcome-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h4>¡Bienvenido al Quiz!</h4>
+                    <p>Ingresa tu nombre para comenzar:</p>
+                    <div class="name-input-container">
+                        <input type="text" id="player-name" class="form-control player-name-input" 
+                               placeholder="Tu nombre" maxlength="20">
+                        <button id="start-quiz-btn" class="btn btn-quiz-start">
+                            <i class="fas fa-play me-2"></i>
+                            Comenzar Quiz
+                        </button>
+                    </div>
+                    <div class="quiz-stats">
+                        <div class="stat-item">
+                            <i class="fas fa-question-circle"></i>
+                            <span>10 Preguntas</span>
+                        </div>
+                        <div class="stat-item">
+                            <i class="fas fa-clock"></i>
+                            <span>Sin límite de tiempo</span>
+                        </div>
+                        <div class="stat-item">
+                            <i class="fas fa-star"></i>
+                            <span>Puntos por respuesta correcta</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Quiz dinámico se cargará aquí -->
+                <div id="quiz-dynamic-content"></div>
+            </div>
+            
+            <!-- Leaderboard Modal o Sección -->
+            <div class="row mt-5" data-aos="fade-up" data-aos-delay="700">
+                <div class="col-12 text-center">
+                    <button class="btn btn-outline-primary btn-lg" id="view-leaderboard-btn">
+                        <i class="fas fa-list-ol me-2"></i>
+                        Ver Historial Completo
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Leaderboard Modal -->
+        <div class="modal fade" id="leaderboardModal" tabindex="-1">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header bg-primary text-white">
+                        <h5 class="modal-title">
+                            <i class="fas fa-trophy me-2"></i>
+                            Historial de Participaciones
+                        </h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-hover">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th>Posición</th>
+                                        <th>Nombre</th>
+                                        <th>Puntuación</th>
+                                        <th>Tiempo</th>
+                                        <th>Fecha</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="leaderboard-table-body">
+                                    <!-- Se llena dinámicamente -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" id="participate-quiz-btn">
+                            <i class="fas fa-play me-2"></i>
+                            ¡Participa en el Quiz!
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Referencias Section -->
+    <section id="referencias" class="py-5 bg-gradient-golden section-transition">
+        <div class="container">
+            <h2 class="text-center mb-5 referencias-title" data-aos="fade-up">
+                <i class="fas fa-book-open me-2"></i>
+                Referencias Bibliográficas
+            </h2>
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="reference-card">
+                        <div class="reference-header">
+                            <h5 class="reference-title">Filibusterismo del Destino Manifiesto</h5>
+                            <span class="reference-year">2009</span>
+                        </div>
+                        <p class="reference-content">
+                            Quesada Camacho, J. R. (2009). Filibusterismo del Destino Manifiesto y la conciencia centroamericana.
+                        </p>
+                        <a href="https://sinabi.go.cr/biblioteca%20digital/articulos/Quesada%20Camacho%20Juan%20Rafael/Filibusterismo%20del%20destino%20manifiesto%20y%20la%20conciencia.pdf" 
+                           target="_blank" class="btn btn-reference">
+                            <i class="fas fa-external-link-alt me-2"></i>Ver referencia
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                    <div class="reference-card">
+                        <div class="reference-header">
+                            <h5 class="reference-title">La Doctrina Monroe y el Destino Manifiesto</h5>
+                            <span class="reference-year">2017</span>
+                        </div>
+                        <p class="reference-content">
+                            Rojas Bolaños, M. (2017). La Doctrina Monroe, el Destino Manifiesto y la intervención estadounidense en América Latina.
+                        </p>
+                        <a href="https://dialnet.unirioja.es/descarga/articulo/6144217.pdf" 
+                           target="_blank" class="btn btn-reference">
+                            <i class="fas fa-external-link-alt me-2"></i>Ver referencia
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+                    <div class="reference-card">
+                        <div class="reference-header">
+                            <h5 class="reference-title">William Walker en Centroamérica</h5>
+                            <span class="reference-year">2015</span>
+                        </div>
+                        <p class="reference-content">
+                            Reyes Matamoros, C. A. (2015). William Walker en Centroamérica: Una amenaza latente en nombre del Destino Manifiesto.
+                        </p>
+                        <a href="https://dialnet.unirioja.es/descarga/articulo/5340107.pdf" 
+                           target="_blank" class="btn btn-reference">
+                            <i class="fas fa-external-link-alt me-2"></i>Ver referencia
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
+                    <div class="reference-card">
+                        <div class="reference-header">
+                            <h5 class="reference-title">La Campaña Nacional de 1856-1857</h5>
+                            <span class="reference-year">2008</span>
+                        </div>
+                        <p class="reference-content">
+                            Aguilar Piedra, R. (2008). La Campaña Nacional de 1856-1857: Perspectivas historiográficas.
+                        </p>
+                        <a href="https://www.sinabi.go.cr/biblioteca%20digital/articulos/Aguilar%20Piedra%20Raul/La%20Campana%20Nacional%20de%201856-1857.pdf" 
+                           target="_blank" class="btn btn-reference">
+                            <i class="fas fa-external-link-alt me-2"></i>Ver referencia
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
+                    <div class="reference-card">
+                        <div class="reference-header">
+                            <h5 class="reference-title">Presencia de la Campaña Nacional</h5>
+                            <span class="reference-year">2007</span>
+                        </div>
+                        <p class="reference-content">
+                            Naranjo Chacón, G. (2007). Presencia de la Campaña Nacional 1856-1857 en la prensa costarricense durante la celebración de su Sesquicentenario.
+                        </p>
+                        <a href="https://www.redalyc.org/pdf/4678/467846087004.pdf" 
+                           target="_blank" class="btn btn-reference">
+                            <i class="fas fa-external-link-alt me-2"></i>Ver referencia
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="600">
+                    <div class="reference-card">
+                        <div class="reference-header">
+                            <h5 class="reference-title">La Campaña Nacional: historiografía</h5>
+                            <span class="reference-year">2008</span>
+                        </div>
+                        <p class="reference-content">
+                            Díaz Arias, D., & Molina Jiménez, I. (2008). La Campaña Nacional (1856-1857): historiografía, literatura y memoria.
+                        </p>
+                        <a href="https://www.researchgate.net/publication/261872282_La_Campana_Nacional_1856-1857_historiografia_literatura_y_memoria" 
+                           target="_blank" class="btn btn-reference">
+                            <i class="fas fa-external-link-alt me-2"></i>Ver referencia
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-12" data-aos="fade-up" data-aos-delay="700">
+                    <div class="reference-card special-reference">
+                        <div class="reference-header">
+                            <h5 class="reference-title">La guerra centroamericana</h5>
+                            <span class="reference-year">2005</span>
+                        </div>
+                        <p class="reference-content">
+                            Vega Bolaños, A. (2005). La guerra centroamericana contra los filibusteros: una revisión crítica.
+                        </p>
+                        <a href="https://sajurin.enriquebolanos.org/vega/docs/Guerra%20de%20CA.pdf" 
+                           target="_blank" class="btn btn-reference">
+                            <i class="fas fa-external-link-alt me-2"></i>Ver referencia
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="bg-dark text-white py-4">
-        <div class="container">
-            <div class="row justify-content-between align-items-center">
-                <div class="col-md-4 text-center text-md-start mb-3 mb-md-0">
-                    <p class="mb-0"> 2025 Campaña Nacional 1856-1857</p>
+    <footer class="footer-modern">
+        <div class="footer-background">
+            <div class="container">
+                <div class="row align-items-center">
+                    <!-- Información del Proyecto -->
+                    <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
+                        <div class="footer-brand" data-aos="fade-right">
+                            <div class="brand-icon">
+                                <i class="fas fa-landmark"></i>
+                            </div>
+                            <div class="brand-content">
+                                <h5 class="brand-title">Campaña Nacional</h5>
+                                <span class="brand-subtitle">1856-1857</span>
+                                <p class="brand-description">
+                                    Un proyecto educativo interactivo sobre la historia de Costa Rica
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Información del Desarrollador -->
+                    <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
+                        <div class="developer-section" data-aos="fade-up">
+                            <div class="developer-header">
+                                <i class="fas fa-code"></i>
+                                <span>Desarrollado por</span>
+                            </div>
+                            <div class="developer-card-modern">
+                                <div class="developer-avatar">
+                                    <i class="fas fa-user-graduate"></i>
+                                </div>
+                                <div class="developer-info-modern">
+                                    <h6 class="developer-name">Kevin Córdoba Rivera</h6>
+                                    <span class="developer-role">Desarrollador Full Stack</span>
+                                    <div class="developer-badges">
+                                        <span class="badge-tech">React</span>
+                                        <span class="badge-tech">Node.js</span>
+                                        <span class="badge-tech">Firebase</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Sección QR Rediseñada -->
+                    <div class="col-lg-4 col-md-12">
+                        <div class="qr-section-modern" data-aos="fade-left">
+                            <div class="qr-header">
+                                <i class="fas fa-qrcode"></i>
+                                <h6>Compartir Proyecto</h6>
+                            </div>
+                            <div class="qr-container-premium">
+                                <div class="qr-frame">
+                                    <img src="images/QR Historia.png" alt="Código QR del Proyecto" class="qr-image">
+                                    <div class="qr-overlay">
+                                        <i class="fas fa-mobile-alt"></i>
+                                    </div>
+                                </div>
+                                <div class="qr-info">
+                                    <p class="qr-instruction">Escanea para acceder al proyecto</p>
+                                    <div class="qr-features">
+                                        <span class="qr-feature">
+                                            <i class="fas fa-smartphone"></i>
+                                            Acceso móvil
+                                        </span>
+                                        <span class="qr-feature">
+                                            <i class="fas fa-share-alt"></i>
+                                            Compartir fácil
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="#inicio" class="btn-back-to-top">
+                                <i class="fas fa-chevron-up"></i>
+                                <span>Volver al inicio</span>
+                            </a>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-md-4 text-center mb-3 mb-md-0">
-                    <h6 class="mb-3">Desarrollado por:</h6>
-                    <ul class="list-unstyled mb-0">
-                        <li>Kevin Córdoba Rivera</li>
-                        <li>Eliacid Castillo Rojas</li>
-                        <li>Adrian Lagos Guzman</li>
-                        <li>Santos Antonio Alvarado Castillo</li>
-                    </ul>
-                </div>
-                <div class="col-md-4 text-center text-md-end">
-                    <div class="qr-container" data-bs-toggle="tooltip" data-bs-placement="top" title="¡Escanea para compartir!">
-                        <img src="images/QR Historia.png" alt="Código QR" class="qr-code" style="max-height: 100px;">
+                
+                <!-- Footer Bottom -->
+                <div class="footer-bottom">
+                    <div class="row align-items-center">
+                        <div class="col-md-6">
+                            <p class="copyright">
+                                © 2025 Historia de Costa Rica. Todos los derechos reservados.
+                            </p>
+                        </div>
+                        <div class="col-md-6 text-md-end">
+                            <div class="social-links">
+                                <a href="#" class="social-link" title="GitHub">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                                <a href="#" class="social-link" title="LinkedIn">
+                                    <i class="fab fa-linkedin"></i>
+                                </a>
+                                <a href="#" class="social-link" title="Portfolio">
+                                    <i class="fas fa-globe"></i>
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -126,19 +547,33 @@
     
     <!-- Scripts de la aplicación -->
     <script src="js/firebase-config.js"></script>
+    <script src="js/enhancements.js"></script>
     <script src="js/main.js"></script>
     <script src="js/map.js"></script>
     <script src="js/timeline.js"></script>
     <script src="js/gallery.js"></script>
-    <script src="js/quiz.js"></script>
+    <script src="js/quiz-enhanced.js"></script>
     
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             console.log('DOM completamente cargado');
+            
+            // INICIALIZAR TEMA PRIMERO
+            console.log('Inicializando tema...');
+            if (typeof initThemeToggle === 'function') {
+                initThemeToggle();
+            } else if (window.HistoriaUtils && window.HistoriaUtils.initThemeToggle) {
+                window.HistoriaUtils.initThemeToggle();
+            } else {
+                console.error('initThemeToggle no está disponible');
+            }
+            
+            // Inicializar AOS con configuración mejorada
             AOS.init({
                 duration: 1000,
                 once: true,
-                offset: 100
+                offset: 100,
+                easing: 'ease-out-cubic'
             });
             
             // Verificar que los contenedores existen
@@ -156,15 +591,139 @@
                 quiz: typeof initQuiz !== 'undefined'
             });
 
-            // Smooth scroll para los enlaces del navbar
+            // Smooth scroll mejorado para los enlaces del navbar
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
                     e.preventDefault();
-                    document.querySelector(this.getAttribute('href')).scrollIntoView({
-                        behavior: 'smooth'
-                    });
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if (targetElement) {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
                 });
             });
+
+            // Función para actualizar el navbar en scroll
+            function updateNavbar() {
+                const navbar = document.querySelector('.navbar');
+                if (window.scrollY > 100) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            }
+
+            // Función para actualizar el progreso de lectura
+            function updateReadingProgress() {
+                const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+                const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                const scrolled = (winScroll / height) * 100;
+                document.getElementById('reading-progress').style.width = scrolled + '%';
+            }
+
+            // Función para activar enlaces de navegación
+            function updateActiveNavLink() {
+                const sections = document.querySelectorAll('section, header');
+                const navLinks = document.querySelectorAll('.nav-link');
+
+                sections.forEach(section => {
+                    const rect = section.getBoundingClientRect();
+                    if (rect.top <= 150 && rect.bottom >= 150) {
+                        const id = section.getAttribute('id');
+                        navLinks.forEach(link => {
+                            link.classList.remove('active');
+                            if (link.getAttribute('href') === `#${id}`) {
+                                link.classList.add('active');
+                            }
+                        });
+                    }
+                });
+            }
+
+            // Event listeners para scroll
+            window.addEventListener('scroll', () => {
+                updateNavbar();
+                updateReadingProgress();
+                updateActiveNavLink();
+            });
+
+            // Efecto parallax suave para el hero
+            window.addEventListener('scroll', () => {
+                const scrolled = window.pageYOffset;
+                const heroSection = document.querySelector('.hero-section');
+                if (heroSection) {
+                    heroSection.style.transform = `translateY(${scrolled * 0.5}px)`;
+                }
+            });
+
+            // Scroll indicator click
+            document.querySelector('.scroll-indicator')?.addEventListener('click', () => {
+                document.querySelector('#timeline').scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+
+            // Efecto de hover para las cards de galería
+            document.addEventListener('mouseover', (e) => {
+                if (e.target.closest('.gallery-item')) {
+                    e.target.closest('.gallery-item').style.transform = 'translateY(-15px) scale(1.02)';
+                }
+            });
+
+            document.addEventListener('mouseout', (e) => {
+                if (e.target.closest('.gallery-item')) {
+                    e.target.closest('.gallery-item').style.transform = '';
+                }
+            });
+
+            // Inicializar tooltips de Bootstrap
+            const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+            tooltipTriggerList.map(function (tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl);
+            });
+
+            // Observer para las transiciones de sección
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        
+                        // Añadir delay escalonado para elementos hijos
+                        const children = entry.target.querySelectorAll('[data-aos]');
+                        children.forEach((child, index) => {
+                            setTimeout(() => {
+                                child.classList.add('aos-animate');
+                            }, index * 100);
+                        });
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            });
+
+            // Observar todas las secciones con transición
+            document.querySelectorAll('.section-transition').forEach(section => {
+                observer.observe(section);
+            });
+
+            // Precarga de imágenes importante
+            const importantImages = [
+                'images/hero-bg.jpg',
+                'images/juan-santamaria.jpg',
+                'images/batalla-rivas.jpg'
+            ];
+
+            importantImages.forEach(src => {
+                const img = new Image();
+                img.src = src;
+            });
+
+            console.log('Inicialización completada');
         });
     </script>
 </body>
