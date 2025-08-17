@@ -202,6 +202,41 @@ body {
     border-radius: 5px;
 }
 
+/* Eliminar border dorado al hacer clic en nav-links */
+.nav-link:focus,
+.nav-link:active,
+.nav-link:focus-visible {
+    outline: none !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+.navbar-nav .nav-link:focus,
+.navbar-nav .nav-link:active,
+.navbar-nav .nav-link:focus-visible {
+    outline: none !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+/* Eliminar outline y border de todos los elementos clickeables de la navbar */
+.navbar .btn:focus,
+.navbar .btn:active,
+.navbar .navbar-toggler:focus,
+.navbar .navbar-toggler:active {
+    outline: none !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+/* Eliminar border dorado general en toda la navbar */
+.navbar *:focus,
+.navbar *:active,
+.navbar *:focus-visible {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
 /* Timeline nuevo y mejorado */
 .timeline-container {
     max-width: 1000px;
@@ -1101,6 +1136,10 @@ html {
     .hero-btn {
         padding: 12px 30px;
         font-size: 1rem;
+        width: 100%;
+        max-width: 250px;
+        margin: 0 auto 10px auto;
+        display: block;
     }
     
     section {
@@ -1151,6 +1190,21 @@ html {
     
     .nav-link {
         font-size: 0.8rem;
+    }
+    
+    .hero-btn {
+        width: 100% !important;
+        max-width: none !important;
+        margin: 5px 0 !important;
+        padding: 15px 20px !important;
+        font-size: 1rem !important;
+        display: block !important;
+    }
+    
+    .hero-content div {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
     }
     
     section h2 {
@@ -1880,18 +1934,22 @@ html {
 
 /* Quiz Container Modern */
 .quiz-container-modern {
-    background: white;
+    background: transparent;
     border-radius: 20px;
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
     overflow: hidden;
-    border: 1px solid rgba(139, 69, 19, 0.1);
+    border: 3px solid #FFA500;
+    max-width: 900px;
+    margin: 0 auto;
+    width: 95%;
 }
 
 .quiz-welcome-card {
-    background: linear-gradient(135deg, var(--bg-light), white);
+    background: linear-gradient(135deg, #2c1810 0%, #8B4513 100%);
     padding: 40px;
     text-align: center;
     border-bottom: 3px solid var(--accent-color);
+    color: #f4e4c1;
 }
 
 .welcome-icon {
@@ -1909,14 +1967,15 @@ html {
 }
 
 .quiz-welcome-card h4 {
-    color: var(--primary-color);
+    color: #ffa500;
     margin-bottom: 10px;
     font-weight: 700;
 }
 
 .quiz-welcome-card p {
-    color: #6c757d;
+    color: #f4e4c1;
     margin-bottom: 25px;
+    opacity: 0.9;
 }
 
 .name-input-container {
@@ -1932,16 +1991,24 @@ html {
     flex: 1;
     min-width: 200px;
     padding: 12px 20px;
-    border: 2px solid #e9ecef;
+    border: 2px solid #ffa500;
     border-radius: 25px;
     font-size: 1rem;
     transition: all 0.3s ease;
+    background: rgba(244, 228, 193, 0.95);
+    color: #2c1810;
+}
+
+.player-name-input::placeholder {
+    color: rgba(44, 24, 16, 0.6);
+    opacity: 1;
 }
 
 .player-name-input:focus {
     border-color: var(--accent-color);
     outline: none;
     box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.2);
+    background: rgba(244, 228, 193, 1);
 }
 
 .btn-quiz-start {
@@ -1972,8 +2039,9 @@ html {
     display: flex;
     align-items: center;
     gap: 8px;
-    color: #6c757d;
+    color: #f4e4c1;
     font-size: 0.9rem;
+    opacity: 0.9;
 }
 
 .stat-item i {
@@ -2045,4 +2113,54 @@ html {
     transform: translateY(-2px) !important;
     box-shadow: 0 12px 35px rgba(255, 215, 0, 0.4) !important;
     color: var(--primary-color) !important;
+}
+
+/* Contenedor del quiz con mismo tamaño que quiz-question-modern */
+.quiz-section .container {
+    width: 95% !important;
+    max-width: 1100px !important;
+    margin: 0 auto !important;
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+}
+
+@media (max-width: 1024px) {
+    .quiz-section .container {
+        width: 95% !important;
+        max-width: 1100px !important;
+        margin: 10px auto !important;
+        padding-left: 0px !important;
+        padding-right: 15px !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .quiz-section .container {
+        width: 95% !important;
+        max-width: none !important;
+        margin: 10px auto !important;
+        padding-left: 15px !important;
+        padding-right: 15px !important;
+    }
+}
+
+/* Icono del cerebro dorado */
+.fa-brain.text-primary {
+    color: #FFD700 !important;
+}
+
+#quiz h2 .fa-brain {
+    color: #FFD700 !important;
+}
+
+/* Placeholder en modo oscuro */
+.dark-theme .player-name-input::placeholder {
+    color: rgba(255, 255, 255, 0.7) !important;
+    opacity: 1 !important;
+}
+
+.dark-theme .player-name-input {
+    background: rgba(244, 228, 193, 0.95) !important;
+    color: #2c1810 !important;
+    border: 2px solid #ffa500 !important;
 }

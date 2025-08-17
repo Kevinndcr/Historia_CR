@@ -3,7 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Campaña Nacional 1856-1857</title>
+    <meta name="description" content="Explora la historia de la Campaña Centroamericana de 1856-1857. Timeline interactivo, galería histórica y quiz educativo sobre este importante episodio de la historia costarricense.">
+    <meta name="keywords" content="Campaña Nacional, Costa Rica, Historia, 1856, 1857, William Walker, Juan Santamaría, Batalla de Rivas">
+    <meta name="author" content="Historia CR">
+    <meta property="og:title" content="Campaña Centroamericana 1856-1857">
+    <meta property="og:description" content="Un viaje interactivo por la historia de Costa Rica y la Campaña Nacional">
+    <meta property="og:type" content="website">
+    <title>Campaña Centroamericana 1856-1857</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBmaWxsPSIjRkZENzAwIiBkPSJNNDYwIDI1NmMwIDExMC02IDIwMS0yMDQgMjA0LTE5OCAwLTIwNC05NC0yMDQtMjA0czYtMjAyIDIwNC0yMDJjMTk4IDAgMjA0IDkyIDIwNCAyMDJaIi8+PHBhdGggZmlsbD0iIzk0NjEzNyIgZD0iTTM1MiAzMjBjMCAzNS0zNSA2NC03OCA2NGgtNDBjLTQzIDAtNzgtMjktNzgtNjRzMzUtNjQgNzgtNjRoNDBjNDMgMCA3OCAyOSA3OCA2NFptLTk2LTEyOGMtMTcgMC0zMi0xNS0zMi0zMnMxNS0zMiAzMi0zMiAzMiAxNSAzMiAzMi0xNSAzMi0zMiAzMlptNjQgMGMtMTcgMC0zMi0xNS0zMi0zMnMxNS0zMiAzMi0zMiAzMiAxNSAzMiAzMi0xNSAzMi0zMiAzMloiLz48L3N2Zz4=">
+    <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBmaWxsPSIjRkZENzAwIiBkPSJNNDYwIDI1NmMwIDExMC02IDIwMS0yMDQgMjA0LTE5OCAwLTIwNC05NC0yMDQtMjA0czYtMjAyIDIwNC0yMDJjMTk4IDAgMjA0IDkyIDIwNCAyMDJaIi8+PHBhdGggZmlsbD0iIzk0NjEzNyIgZD0iTTM1MiAzMjBjMCAzNS0zNSA2NC03OCA2NGgtNDBjLTQzIDAtNzgtMjktNzgtNjRzMzUtNjQgNzgtNjRoNDBjNDMgMCA3OCAyOSA3OCA2NFptLTk2LTEyOGMtMTcgMC0zMi0xNS0zMi0zMnMxNS0zMiAzMi0zMiAzMiAxNSAzMiAzMi0xNSAzMi0zMiAzMloiLz48L3N2Zz4=">
     <!-- Fuentes -->
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
     <!-- Font Awesome -->
@@ -43,7 +52,7 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
         <div class="container">
-            <a class="navbar-brand" href="#">Campaña Nacional</a>
+            <a class="navbar-brand" href="#">Campaña Centroamericana</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -54,11 +63,6 @@
                     <li class="nav-item"><a class="nav-link" href="#mapa">Mapa</a></li>
                     <li class="nav-item"><a class="nav-link" href="#galeria">Galería</a></li>
                     <li class="nav-item"><a class="nav-link" href="#quiz">Quiz</a></li>
-                    <li class="nav-item">
-                        <button class="btn btn-outline-warning btn-sm theme-toggle" id="themeToggle" aria-label="Cambiar tema">
-                            <i class="fas fa-sun" id="themeIcon"></i>
-                        </button>
-                    </li>
                 </ul>
             </div>
         </div>
@@ -69,7 +73,7 @@
         <div class="container h-100">
             <div class="row h-100 align-items-center">
                 <div class="col-12 text-center text-white hero-content">
-                    <h1 class="display-3 mb-4" data-aos="fade-up" data-aos-duration="1000">Campaña Nacional 1856-1857</h1>
+                    <h1 class="display-3 mb-4" data-aos="fade-up" data-aos-duration="1000">Campaña Centroamericana 1856-1857</h1>
                     <p class="lead mb-4" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000">Un viaje interactivo por la historia de Costa Rica</p>
                     <div data-aos="fade-up" data-aos-delay="400" data-aos-duration="1000">
                         <a href="#timeline" class="btn btn-outline-light btn-lg hero-btn me-3 mb-2">
@@ -143,7 +147,7 @@
     </section>
 
     <!-- Quiz Section -->
-    <section id="quiz" class="py-5 bg-light section-transition">
+    <section id="quiz" class="quiz-section py-5 bg-light section-transition">
         <div class="container">
             <h2 class="text-center mb-5" data-aos="fade-up">
                 <i class="fas fa-brain me-2 text-primary"></i>
